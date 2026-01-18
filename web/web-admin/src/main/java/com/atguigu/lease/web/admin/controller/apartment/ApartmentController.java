@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Tag(name = "公寓信息管理")
-@RestController
+@RestController // 将方法返回值序列化为json字符串，返回给前端
 @RequestMapping("/admin/apartment")
 public class ApartmentController {
 
