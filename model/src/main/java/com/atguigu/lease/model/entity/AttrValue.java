@@ -17,6 +17,6 @@ public class AttrValue extends BaseEntity {
     private String name;
 
     @Schema(description = "对应的属性key_id")
-    @TableField(value = "attr_key_id")
+    @TableField(value = "attr_key_id") // 相当于外键，多value对一key
     private Long attrKeyId;
 }

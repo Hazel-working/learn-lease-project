@@ -20,3 +20,13 @@ spring:
 mybatis-plus:
   configuration: # 用于打印框架生成的sql语句，便于调试
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+minio:
+  endpoint: http://192.168.10.101:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: lease
+
+#  将嵌套参数做打平处理，方便调试
+springdoc:
+  default-flat-param-object: true

@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @Schema(description = "后台管理系统公寓列表实体")
 public class ApartmentItemVo extends ApartmentInfo {
+    // 继承ApartmentInfo实体类的属性外，添加属性
 
     @Schema(description = "房间总数")
     private Long totalRoomCount;

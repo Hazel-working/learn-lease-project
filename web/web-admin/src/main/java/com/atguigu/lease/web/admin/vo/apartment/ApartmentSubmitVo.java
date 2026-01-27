@@ -12,6 +12,7 @@ import java.util.List;
 @Schema(description = "公寓信息")
 @Data
 public class ApartmentSubmitVo extends ApartmentInfo {
+    //继承ApartmentInfo实体类的全部属性
 
     @Schema(description = "公寓配套id")
     private List<Long> facilityInfoIds;
@@ -24,5 +25,6 @@ public class ApartmentSubmitVo extends ApartmentInfo {
 
     @Schema(description = "公寓图片id")
     private List<GraphVo> graphVoList;
+    //GraphVo包含图片名称和图片地址
 
 }

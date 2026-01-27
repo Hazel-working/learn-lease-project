@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
+// 基类
 public class BaseEntity implements Serializable {
 
     @Schema(description = "主键")

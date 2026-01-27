@@ -4,4 +4,80 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.lease.web.admin.mapper.ApartmentInfoMapper">
 
+    <select id="pageApartmentItemByQuery" resultType="com.atguigu.lease.web.admin.vo.apartment.ApartmentItemVo">
+        select ai.id,
+        ai.name,
+        ai.introduction,
+        ai.district_id,
+        ai.district_name,
+        ai.city_id,
+        ai.city_name,
+        ai.province_id,
+        ai.province_name,
+        ai.address_detail,
+        ai.latitude,
+        ai.longitude,
+        ai.phone,
+        ai.is_release,
+        -- 使用IFNULL函数处理空值，确保统计字段不为null
+        ifnull(tc.cnt,0) total_room_count,
+        ifnull(tc.cnt,0) - ifnull(cc.cnt,0) free_room_count
+        from
+
+        -- 公寓基本信息子查询 ai
+        (select id,
+        name,
+        introduction,
+        district_id,
+        district_name,
+        city_id,
+        city_name,
+        province_id,
+        province_name,
+        address_detail,
+        latitude,
+        longitude,
+        phone,
+        is_release
+        from apartment_info
+        <where>
+            is_deleted=0
+            <if test="queryVo.provinceId != null">
+                and province_id=#{queryVo.provinceId}
+            </if>
+            <if test="queryVo.cityId != null">
+                and city_id=#{queryVo.cityId}
+            </if>
+            <if test="queryVo.districtId != null">
+                and district_id=#{queryVo.districtId}
+            </if>
+        </where>
+        ) ai
+
+        -- 使用外连接确保即使没有房间或租约的公寓也能被查询到
+        left join
+
+        -- 所有房间 tc
+        (select apartment_id,
+            count(*) cnt
+        from room_info
+        where is_deleted = 0
+        and is_release = 1
+        group by apartment_id) tc
+
+        on ai.id = tc.apartment_id
+
+        left join
+
+        -- 已租房间 cc
+        (select apartment_id,
+            count(*) cnt
+        from lease_agreement
+        where is_deleted = 0
+        -- status in (2, 5): 只统计有效租约
+        and status in (2, 5)
+        group by apartment_id) cc
+
+        on ai.id = cc.apartment_id
+    </select>
 </mapper>
