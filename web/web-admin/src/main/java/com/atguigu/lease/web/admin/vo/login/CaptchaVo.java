@@ -10,7 +10,7 @@ import lombok.Data;
 public class CaptchaVo {
 
     @Schema(description = "验证码图片信息")
-    private String image;
+    private String image; // 二进制 -> base64编码后的图像字符串src
 
     @Schema(description = "验证码key")
     private String key;

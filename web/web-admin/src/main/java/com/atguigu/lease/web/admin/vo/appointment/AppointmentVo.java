@@ -8,7 +8,8 @@ import lombok.Data;
 @Data
 @Schema(description = "预约看房信息")
 public class AppointmentVo extends ViewAppointment {
-
+    //继承ViewAppointment属性，VO对象与实体对象字段高度重合
+    //数据安全：只返回前端需要的数据
     @Schema(description = "预约公寓信息")
     private ApartmentInfo apartmentInfo;
 

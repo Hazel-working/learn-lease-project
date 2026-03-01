@@ -22,7 +22,8 @@ public class UserInfo extends BaseEntity {
     private String phone;
 
     @Schema(description = "密码")
-    @TableField(value = "password")
+    //通用方法查询时，密码不需要返回
+    @TableField(value = "password", select = false)
     private String password;
 
     @Schema(description = "头像url")

@@ -1,6 +1,7 @@
 package com.atguigu.lease.model.entity;
 
 import com.atguigu.lease.model.enums.AppointmentStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -12,7 +13,7 @@ import java.util.Date;
 @TableName(value = "view_appointment")
 @Data
 public class ViewAppointment extends BaseEntity {
-
+    // 预约看房信息表
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户id")
@@ -33,6 +34,7 @@ public class ViewAppointment extends BaseEntity {
 
     @Schema(description = "预约时间")
     @TableField(value = "appointment_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date appointmentTime;
 
     @Schema(description = "备注信息")

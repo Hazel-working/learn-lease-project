@@ -15,11 +15,26 @@ spring:
       maximum-pool-size: 12 #连接池最大连接数，默认是10
       minimum-idle: 10 #最小空闲连接数量
       pool-name: SPHHikariPool # 连接池名称
+  jackson:
+      time-zone: GMT+8
+  data:
+    redis:
+      host: 192.168.10.101
+      port: 6379
+      database: 0
 
 
 mybatis-plus:
   configuration: # 用于打印框架生成的sql语句，便于调试
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      update-strategy: not_null
+# mbp 更新策略update-strategy
+# `ignore`：忽略空值判断，不管字段是否为空，都会进行更新
+# `not_null`：进行非空判断，字段非空才会进行判断，默认值
+# `not_empty`：进行非空判断，并进行非空串（""）判断，主要针对字符串类型
+# `never`：从不进行更新，不管该字段为何值，都不更新
 
 minio:
   endpoint: http://192.168.10.101:9000
